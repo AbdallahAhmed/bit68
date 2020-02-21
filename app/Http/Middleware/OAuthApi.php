@@ -43,7 +43,7 @@ class OAuthApi
         if (!isset($user)) {
             return false;
         }
-        Auth::guard('frontend')->onceUsingId($user->id);
+        Auth::onceUsingId($user->id);
         return true;
     }
 

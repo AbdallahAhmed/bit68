@@ -37,6 +37,7 @@ class AuthController extends APIController
         }
 
         $user = Auth()->user();
+        $user->api_token = User::newApiToken();
         $user->save();
 
         return $this->response(['user' => $user, 'token' => $user->api_token]);
@@ -52,7 +53,7 @@ class AuthController extends APIController
     {
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'name' => 'required',
         ]);

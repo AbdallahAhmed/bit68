@@ -41,7 +41,7 @@ class User extends Authenticatable
      * generate API token
      * @return string
      */
-    function newApiToken()
+    static function newApiToken()
     {
         return str_random(60);
     }

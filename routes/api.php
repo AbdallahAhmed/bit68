@@ -16,6 +16,6 @@ use Illuminate\Http\Request;
 Route::post('/auth', 'API\AuthController@login');
 Route::post('/auth/register', 'API\AuthController@register');
 
-Route::group(["middleware" => ['api-auth']], function ($router) {
-
+Route::group(["middleware" => ['api-auth'], 'prefix' => 'forecast'], function ($router) {
+    $router->get('/weather', 'API\ForecastController@weather');
 });
