@@ -24,8 +24,12 @@ class ForecastController extends APIController
         $city = $request->get('city');
         $current_weather = $weather->getCurrentWeather($city);
 
+        if ($current_weather->city->id == 0) {
+            return $this->errorResponse(['message' => 'Invalid City name']);
+        }
+
         return $this->response([
-            'temperature' => $current_weather->temperature->getFormatted(),
+            'temperature' => $current_weather->temperature->getValue()." C",
             'humidity' => $current_weather->humidity->getFormatted(),
             'clouds' => $current_weather->clouds->getFormatted(),
             'pressure' => $current_weather->pressure->getFormatted(),
