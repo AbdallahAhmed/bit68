@@ -12,8 +12,10 @@
 */
 
 Route::any('/', 'AuthController@login')->middleware('guest')->name('login');
-Route::any('/logout', 'AuthController@logout')->name('logout');
 
-Route::group(["middleware" => ['auth'], 'prefix' => 'forecast'], function ($router) {
-    $router->any('/weather', 'ForecastController@weather')->name('weather');
+Route::group(["middleware" => 'auth'], function () {
+    Route::any('/logout', 'AuthController@logout')->name('logout');
+    Route::group(["prefix" => 'forecast'], function ($router) {
+        $router->any('/weather', 'ForecastController@weather')->name('weather');
+    });
 });
